@@ -1,0 +1,52 @@
+## Vector Dimensions
+
+Each charm is represented by a 4-dimensional vector with the following parameters:
+1. Power (0-1): The strength/potency of the charm
+2. Range (0-1): The effective area/distance of the charm
+3. Complexity (0-1): How difficult the charm is to cast
+4. Duration (0-1): How long the charm's effects last
+
+## Requirements
+
+- Python 3.x
+- Redis server
+- Required packages: `redis`, `numpy`
+
+## Installation
+
+```bash
+pip install redis numpy
+```
+
+## Usage
+
+1. Start the Redis server:
+```bash
+sudo service redis-server start
+```
+
+2. Run the script:
+```bash
+python charm_vector_db.py
+```
+
+## How It Works
+
+1. The script stores charm vectors in Redis using the charm name as the key
+2. When querying, it calculates the cosine similarity between the query vector and all stored charm vectors
+3. Results are sorted by similarity score (highest first)
+
+## Example Output
+
+```
+Added charm: Charm1 with vector: [0.3 0.2 0.1 0.8]
+Added charm: Charm2 with vector: [0.6 0.5 0.6 0.3]
+Added charm: Charm3 with vector: [0.9 0.8 0.7 0.5]
+
+Query Vector: [0.4 0.3 0.2 0.7]
+
+Similarity Search Results:
+Charm: Charm1, Similarity: 0.9839
+Charm: Charm2, Similarity: 0.8366
+Charm: Charm3, Similarity: 0.8339
+```
